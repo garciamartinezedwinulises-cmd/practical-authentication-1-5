@@ -31,11 +31,15 @@ class User extends Authenticatable
     }
     public function roles()
     {
-        return $this->belongsToMany(Role::class, "user_roles");
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
     }
 
     public function hasRole($role)
     {
-        return $this->roles()->where("name", $role)->exists();
+        if (is_array($role)) {
+            return $this->roles->pluck('name')->contains($role);
+        }
+    
+        return $this->roles->contains('name', $role);
     }
 }

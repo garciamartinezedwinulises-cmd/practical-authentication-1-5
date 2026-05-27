@@ -42,10 +42,20 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        \DB::table('user_roles')->insert([
+            'user_id' => $user->id,
+            'role_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        if ($user->hasRole('admin') || $user->hasRole('editor')) {
+            return redirect(route('dashboard', absolute: false));
+        }
+        return redirect('/posts');
     }
 }

@@ -45,15 +45,24 @@ Una vez que el servidor este corriendo en http://127.0.0.1:8000, se pueden valid
 * Practica 4 y 5 (Datos masivos y paginacion):
   Listado publico de publicaciones optimizado: http://127.0.0.1:8000/posts
 
-## Pasos para crear un usuario administrador en phpMyAdmin
 
-Para probar de manera correcta las rutas protegidas por roles como el dashboard, sigue estos pasos para otorgar permisos administrativos:
+## Cuentas de prueba preconfiguradas
 
-1. Entra al formulario de registro en http://127.0.0.1:8000/register y crea una cuenta de forma normal. Esto garantiza que la contraseña se encripte bajo los estandares de Laravel.
-2. Abre phpMyAdmin en el navegador ingresando a http://localhost/phpmyadmin.
-3. En la barra lateral izquierda selecciona la base de datos practica_breeze y abre la tabla llamada users.
-4. En la pestaña Examinar, ubica el registro que acabas de crear y selecciona la opcion Editar.
-5. Busca el campo encargado del rol (columna role) y cambia su valor actual por la palabra admin.
-6. Guarda los cambios presionando el boton Continuar al final de la pagina.
+El sistema incluye un llenado automático de base de datos (Seeders) que genera tres perfiles con accesos diferenciados para facilitar las pruebas de seguridad:
+
+- **Administrador:**
+  - Correo: admin@prueba.com
+  - Contraseña: 123456789
+  - Privilegios: Acceso total al dashboard, creación, edición y eliminación de publicaciones.
+
+- **Editor:**
+  - Correo: editor@prueba.com
+  - Contraseña: 123456789
+  - Privilegios: Acceso al dashboard y edición de publicaciones. No puede eliminar registros.
+
+- **Lector (Viewer):**
+  - Correo: viewer@prueba.com
+  - Contraseña: 123456789
+  - Privilegios: Solo lectura en el listado público de publicaciones.
 
 Con esto el usuario contara con los accesos necesarios para ingresar al dashboard administrativo sin recibir el error de restriccion 403.

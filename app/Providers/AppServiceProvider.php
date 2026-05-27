@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Tus reglas de seguridad existentes se mantienen intactas aquí abajo
         Gate::define("view-dashboard", function ($user) {
-            return $user->hasRole("admin") || $user->hasRole("editor") || $user->hasRole("viewer");
+            return $user->hasRole("admin") || $user->hasRole("editor");
         });
         Gate::define ("edit_post", function ($user) {
             return $user->hasRole("admin") || $user->hasRole("editor");

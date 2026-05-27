@@ -18,11 +18,16 @@ class CheckRole
         if (!auth()->check()) {
             abort(403, "Unauthorized access");
         }
+
+        // Línea temporal de diagnóstico para cruzar los IDs de la base de datos
+        
+
         foreach ($roles as $role) {
             if (auth()->user()->hasRole($role)){
                 return $next($request);
             }
         }
+
         abort(403, "Unauthorized access");
     }
 }
